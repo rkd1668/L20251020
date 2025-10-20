@@ -3,7 +3,7 @@
 #include <windows.h>
 
 AActor::AActor() :
-	Shape(' '), Location(0, 0)
+	Shape(' '), Location(0, 0), ZOrder(0)
 {
 }
 

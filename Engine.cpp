@@ -78,7 +78,9 @@ void FEngine::Init()
 		}
 	}
 
-	//std::sort(World->GetAllActors(), );
+	World->SelectionSortActors();
+	//World->SortActorsByZOrder();
+	//std::sort(World->GetAllActors().begin(), World->GetAllActors().end(), World->CompareActorZOrder);
 	//MapFile.close();
 
 }
