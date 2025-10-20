@@ -4,20 +4,27 @@ using namespace std;
 
 class Singleton
 {
-private:
+protected:
 	Singleton()
 	{
-
 	}
+
 public:
-	Singleton* GetInstance()
+	static Singleton* GetInstance()
 	{
-		return this;
-	};
+		if (Instance == nullptr)
+		{
+			Instance = new Singleton();
+		}
+		return Instance;
+	}
 
-	static int Gold;
-
+protected:
+	static Singleton* Instance;
 };
+
+Singleton* Singleton::Instance = nullptr;
+
 //entry point
 int main(int argc, char* argv[])
 {
@@ -25,12 +32,12 @@ int main(int argc, char* argv[])
 
 	GEngine = MyEngine;
 
-	MyEngine->Init();
+	/*MyEngine->Init();
 	MyEngine->Run();
 	MyEngine->Term();
 
 	delete MyEngine;
-	MyEngine = nullptr;
+	MyEngine = nullptr;*/
 
 	return 0;
 }
