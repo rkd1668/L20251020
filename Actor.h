@@ -11,6 +11,7 @@ public:
 	
 	//virtual fuction table -> vftbl
 	virtual void Tick(); //이건 자식이 재정의 할 수도 있다.
+	virtual void Render();
 
 	__forceinline FVector2D GetActorLocation() const
 	{
@@ -24,7 +25,18 @@ public:
 		Location.Y = Value.Y;
 	}
 
-private:
+	__forceinline char GetShape()
+	{
+		return Shape;
+	}
+
+	void SetShape(char Value)
+	{
+		Shape = Value;
+	}
+
+protected:
 	FVector2D Location;
+	char Shape;
 };
 

@@ -1,16 +1,36 @@
-#include <iostream>
-#include "Actor.h"
-#include "Player.h"
+#include "Engine.h"
 
 using namespace std;
 
-//entry point
-int main()
+class Singleton
 {
-	AActor* MyPlayer = new APlayer();
+private:
+	Singleton()
+	{
 
-	MyPlayer->Tick();
+	}
+public:
+	Singleton* GetInstance()
+	{
+		return this;
+	};
 
-	delete MyPlayer;
+	static int Gold;
+
+};
+//entry point
+int main(int argc, char* argv[])
+{
+	FEngine* MyEngine = new FEngine();
+
+	GEngine = MyEngine;
+
+	MyEngine->Init();
+	MyEngine->Run();
+	MyEngine->Term();
+
+	delete MyEngine;
+	MyEngine = nullptr;
+
 	return 0;
 }
