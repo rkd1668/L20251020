@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <conio.h>
+#include <algorithm>
 
 #include "Wall.h"
 #include "World.h"
@@ -11,7 +12,8 @@
 #include "Goal.h"
 #include "Floor.h"
 
-FEngine* GEngine = nullptr;
+
+FEngine* FEngine::Instance = nullptr;
 
 FEngine::FEngine() :
 	World(nullptr)
@@ -51,13 +53,6 @@ void FEngine::Init()
 					NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
-				else if (Line[X] == ' ')
-				{
-					AActor* NewActor = new AFloor();
-					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetShape(Line[X]);
-					World->SpawnActor(NewActor);
-				}
 				else if (Line[X] == 'M')
 				{
 					AActor* NewActor = new AMonster();
@@ -72,12 +67,19 @@ void FEngine::Init()
 					NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
+				{
+					AActor* NewActor = new AFloor();
+					NewActor->SetActorLocation(FVector2D(X, Y));
+					NewActor->SetShape(Line[X]);
+					World->SpawnActor(NewActor);
+				}
 			}
 			Y++;
 		}
 	}
 
-	MapFile.close();
+	//std::sort(World->GetAllActors(), );
+	//MapFile.close();
 
 }
 
@@ -98,7 +100,7 @@ void FEngine::Term()
 
 void FEngine::Input()
 {
-	int KeyCode = _getch();
+	KeyCode = _getch();
 }
 
 void FEngine::Tick()
