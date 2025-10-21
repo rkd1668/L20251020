@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	TDynamicArray a;
+	TDynamicArray<int> a; 
 	for (int i = 0; i < 43; i++)
 	{
 		a.PushBack(i);
