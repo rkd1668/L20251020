@@ -17,6 +17,8 @@ public:
 
 	static bool CompareActorZOrder(AActor* a,AActor* b);
 
+	void SortActor();
+
 	void SortActorsByZOrder();
 
 	void SelectionSortActors();
