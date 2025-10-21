@@ -14,22 +14,42 @@ public:
 	};
 	virtual ~TDynamicArray()
 	{
-
+		if (Data)
+		{
+			delete[] Data;
+		}
 	};
 
+protected:
 	T* Data = nullptr;
 
-	int Size = 0;
-	int Capacity = 0;
+	size_t Size = 0;
+	size_t Capacity = 0;
 
-	int Index = 0;
+	int CurrentIndex = 0;
+
+public:
+	size_t GetSize()
+	{
+		return Size;
+	}
+
+	size_t GetCapacity()
+	{
+		return Capacity;
+	}
+
+	T& operator[](size_t _Index)
+	{
+		return Data[_Index];
+	}
 
 	void PushBack(T Value)
 	{
-		if (Index < Capacity)
+		if (CurrentIndex < Capacity)
 		{
-			Data[Index] = Value;
-			Index++;
+			Data[CurrentIndex] = Value;
+			CurrentIndex++;
 			Size++;
 		}
 		else
@@ -40,13 +60,13 @@ public:
 			}
 			int* TempData = new int[Capacity * 2];
 			//배열의 사이즈를 늘린다.
-			for (int i = 0; i < Size; i++)
-			{
-				TempData[i] = Data[i];
-			}
+			//for (size_t i = 0; i < Size; i++)
+			//{
+			//	TempData[i] = Data[i];
+			//}
 
-			memcpy(Data, TempData, Size * sizeof(int));
-			memmove(Data, TempData, Size * sizeof(int));
+			memcpy(TempData, Data, Size * sizeof(int));
+			//memmove(TempData, Data, Size * sizeof(int));
 			if (Data)
 			{
 				delete[] Data;
@@ -55,18 +75,18 @@ public:
 			Capacity *= 2;
 			Size++;
 
-			Data[Index] = Value;
-			Index++;;
+			Data[CurrentIndex] = Value;
+			CurrentIndex++;
 		}
 	};
 
-	void Print()
-	{
-		for (int i = 0; i < Index; i++)
-		{
-			std::cout << Data[i] << std::endl;
-		}
-	};
+	//void Print()
+	//{
+	//	for (int i = 0; i < CurrentIndex; i++)
+	//	{
+	//		std::cout << Data[i] << std::endl;
+	//	}
+	//};
 };
 
 

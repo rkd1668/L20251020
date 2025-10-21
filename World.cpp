@@ -10,9 +10,9 @@ UWorld::~UWorld()
 {
 }
 
-std::vector<AActor*> UWorld::GetAllActors() const
+void UWorld::GetAllActors(std::vector<AActor*>& OutActors) const
 {
-	return Actors;
+	OutActors = Actors;
 }
 
 //팩토리 패턴(생성도 이함수가 함)
