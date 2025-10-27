@@ -1,9 +1,8 @@
 #include "Engine.h"
 #include <iostream>
 
-#include <vector>
-#include <list>
-
+#include "Vector.h"
+#include "DynamicArray.h"
 
 //class 설계
 //자료구조(STL) 사용
@@ -11,28 +10,18 @@
 
 int main(int argc, char* argv[])
 {
-	std::vector<int> V;
-	V.push_back(1);
-	V.push_back(2);
-	V.push_back(3);
+	TDynamicArray<int> D;
+	D.PushBack(1);
+	D.PushBack(2);
+	D.PushBack(3);
+	
+	//복사 생성자, 깊은 복사
+	TDynamicArray<int> D2 = D;
 
-	//for (std::vector<int>::iterator i = V.begin(); i != V.end(); i++)
-	for (auto i = V.begin(); i != V.end(); i++)
-	{
-		std::cout << *i << ", ";
-	}
-	std::cout << std::endl;
-
-	std::list<int> L;
-	L.push_back(2);
-	L.push_back(3);
-	L.push_back(1);
-
-	L.sort();
-
-	for (auto Data : L)
-	{
-		std::cout << Data << ", ";
-	}
+	D2[2] = 4;
+	std::cout << D[2] << std::endl;
+	/*FVector2D A(1, 1);
+	FVector2D B;
+	B = A;*/
 	return 0;
 }

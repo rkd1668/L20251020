@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdio.h>
 
+
+//compile 할때 코드 생성, 에러가 예측이 됨.
 template<typename T>
 class TDynamicArray
 {
@@ -12,6 +14,20 @@ public:
 	{
 
 	};
+
+	//deep copy
+	//copy constructor(복사 생성자)
+	TDynamicArray(const TDynamicArray<T>& RHS) 
+	{
+		this->Size = RHS.Size;
+		this->Capacity = RHS.Capacity;
+
+		this->CurrentIndex = RHS.CurrentIndex;
+
+		this->Data = new T[Capacity];
+		memmove(RHS.Data, RHS.Data, Size * sizeof(int));
+	}
+
 	virtual ~TDynamicArray()
 	{
 		if (Data)
