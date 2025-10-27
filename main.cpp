@@ -1,18 +1,22 @@
-#include "Engine.h"
-#include <iostream>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_main.h>
 
-#include "Vector.h"
-#include "DynamicArray.h"
+#pragma comment(lib, "SDL3")
 
-//class 설계
-//자료구조(STL) 사용
+//c++ console entry -> iOS, Window, Linux
+//int main(int argc, char* argv[])
+//{
+//
+//	return 0;
+//}
 
-
-int main(int argc, char* argv[])
+int SDL_main(int argc, char* argv[])
 {
-	GEngine->Init();
-	GEngine->Run();
-	GEngine->Term();
+	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
+	SDL_Window* MyWindow = SDL_CreateWindow("Game", 640, 480, SDL_WINDOW_OPENGL);
+	while (true);
+	SDL_DestroyWindow(MyWindow);
+	SDL_Quit();
 	return 0;
 }
