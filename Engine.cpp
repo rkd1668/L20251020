@@ -11,6 +11,7 @@
 #include "Monster.h"
 #include "Goal.h"
 #include "Floor.h"
+#include "GameMode.h"
 
 
 FEngine* FEngine::Instance = nullptr;
@@ -26,6 +27,7 @@ FEngine::~FEngine()
  
 void FEngine::Init()
 {
+	srand((unsigned int)time(nullptr));
 	World = new UWorld;
 
 	std::ifstream MapFile("Level01.map");
@@ -70,14 +72,19 @@ void FEngine::Init()
 				{
 					AActor* NewActor = new AFloor();
 					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetShape(Line[X]);
+					NewActor->SetShape(' ');
 					World->SpawnActor(NewActor);
 				}
 			}
 			Y++;
 		}
 	}
+
+	MapFile.close();
+
 	World->SortActor();
+
+	World->SpawnActor(new AGameMode());
 	//World->SelectionSortActors();
 	//World->SortActorsByZOrder();
 	//std::sort(World->GetAllActors().begin(), World->GetAllActors().end(), World->CompareActorZOrder);
@@ -102,7 +109,10 @@ void FEngine::Term()
 
 void FEngine::Input()
 {
-	KeyCode = _getch();
+	if (_kbhit())
+	{
+		KeyCode = _getch();
+	}
 }
 
 void FEngine::Tick()

@@ -1,10 +1,13 @@
 #include "Engine.h"
 #include "Player.h"
+#include "World.h"
 #include <iostream>
 
 APlayer::APlayer()
 {
 	ZOrder = 1003;
+	bIsCollision = true;
+	bIsOverlap = true;
 }
 
 APlayer::~APlayer()
@@ -14,7 +17,8 @@ APlayer::~APlayer()
 void APlayer::Tick()
 {
 	int KeyCode = GEngine->GetKeyCode();
-
+	FVector2D SaveLocation;
+	SaveLocation = Location;
 	if (KeyCode == 'w')
 	{
 		Location.Y--;
@@ -31,4 +35,23 @@ void APlayer::Tick()
 	{
 		Location.X++;
 	}
+	std::vector<AActor*> AllActors;
+	GEngine->GetWorld()->GetAllActors(AllActors);
+	
+	bool bFlag = false;
+
+	for (auto OtherActor : AllActors)
+	{
+		if (CheckCollision(OtherActor))
+		{
+			bFlag = true;
+			break;
+		}
+	}
+
+	if (bFlag)
+	{
+		Location = SaveLocation;
+	}
+	
 }

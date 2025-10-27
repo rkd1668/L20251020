@@ -10,6 +10,7 @@ public:
 	virtual ~AActor();
 	
 	//virtual fuction table -> vftbl
+	//override
 	virtual void Tick(); //이건 자식이 재정의 할 수도 있다.
 	virtual void Render();
 
@@ -39,9 +40,19 @@ public:
 	{
 		return ZOrder;
 	}
+
+	bool CheckCollision(const AActor* Other);
+
+	virtual void ActorBeginOverlap();
+	virtual void Hit();
+
 protected:
 	FVector2D Location;
 	char Shape;
 	int ZOrder;
+
+public:
+	bool bIsCollision = false;
+	bool bIsOverlap = true;
 };
 
