@@ -33,17 +33,35 @@ int SDL_main(int argc, char* argv[])
 		else
 		{
 			//command queue
-			SDL_SetRenderDrawColor(MyRenderer, 0, 0, 255, 0);
+			SDL_SetRenderDrawColor(MyRenderer, 255, 255, 255, 0);
 			SDL_RenderClear(MyRenderer);
 			//화면 업데이트
 			
-			for (int i = 0; i < 100; i++)
+			//중심 0, 0, 반지름 1
+			for (int j = 0; j < 1; ++j)
 			{
 				SDL_SetRenderDrawColor(MyRenderer, SDL_rand(255), SDL_rand(255), SDL_rand(255), 0);
-				SDL_FRect Rect = { SDL_rand(640), SDL_rand(480), SDL_rand(200) + 1, SDL_rand(200) + 1 };
-				SDL_RenderFillRect(MyRenderer, &Rect);
-				SDL_RenderRects(MyRenderer, &Rect, 1);
+
+				//중심 0, 0, 반지름 1
+				int Radius = SDL_rand(630) + 10;
+				int CenterX = SDL_rand(640);
+				int CenterY = SDL_rand(480);
+				//int Radius = 300;
+				//int CenterX = 320;
+				//int CenterY = 240;
+				for (int Degree = 30; Degree <= 360; Degree += 30)
+				{
+					int OldX = SDL_cos((float)(Degree - 30) * SDL_PI_F / 180.0f) * Radius + CenterX;
+					int OldY = SDL_sin((float)(Degree - 30) * SDL_PI_F / 180.0f) * Radius + CenterY;
+
+					int X = SDL_cos((float)Degree * SDL_PI_F / 180.0f) * Radius + CenterX;
+					int Y = SDL_sin((float)Degree * SDL_PI_F / 180.0f) * Radius + CenterY;
+
+					SDL_RenderLine(MyRenderer, OldX, OldY, X, Y);
+				}
 			}
+
+
 			SDL_RenderPresent(MyRenderer);
 		}
 	}

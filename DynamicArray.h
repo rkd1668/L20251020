@@ -28,6 +28,18 @@ public:
 		memmove(RHS.Data, RHS.Data, Size * sizeof(int));
 	}
 
+	TDynamicArray<T>& operator=(const TDynamicArray<T>& RHS)
+	{
+		this->Size = RHS.Size;
+		this->Capacity = RHS.Capacity;
+
+		this->CurrentIndex = RHS.CurrentIndex;
+
+		this->Data = new T[Capacity];
+		memmove(RHS.Data, RHS.Data, Size * sizeof(int));
+		return *this;
+	}
+
 	virtual ~TDynamicArray()
 	{
 		if (Data)
