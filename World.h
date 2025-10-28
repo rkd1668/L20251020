@@ -19,7 +19,7 @@ public:
 
 	void SortActor();
 
-	void SortActorsByZOrder();
+	//void SortActorsByZOrder();
 
 	//void SelectionSortActors();
 protected:

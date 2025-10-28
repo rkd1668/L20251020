@@ -5,13 +5,18 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Goal.h"
+#include "CollisionComponent.h"
 
 
 
 AGameMode::AGameMode()
 {
-	bIsCollision = false;
-	bIsOverlap = false;
+	//bIsCollision = false;
+	//bIsOverlap = false;
+	UCollisionComponent* Collision = new UCollisionComponent();
+	Collision->bIsCollision = false;
+	Collision->bIsOverlap = false;
+	AddComponent(Collision);
 }
 
 AGameMode::~AGameMode()

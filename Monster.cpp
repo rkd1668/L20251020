@@ -2,20 +2,28 @@
 #include "World.h"
 #include "Engine.h"
 #include "PaperFlipbookComponent.h"
+#include "CollisionComponent.h"
+#include "Component.h"
 #include <iostream>
 
 AMonster::AMonster()
 {
 	//ZOrder = 1001;
-	bIsCollision = true;
-	bIsOverlap = true;
+	//bIsCollision = true;
+	//bIsOverlap = true;
 	//Color = { 0, 0, 255, 0 };
-	UPaperFlipbookComponent* Paper = new UPaperFlipbookComponent();
-	Paper->SetShape('M');
-	Paper->SetOwner(this);
-	Paper->ZOrder = 1001;
-	Paper->Color = SDL_Color{0, 0, 255, 0 };
-	AddComponent(Paper);
+	Flipbook = new UPaperFlipbookComponent();
+	Flipbook->SetShape('M');
+	Flipbook->SetOwner(this);
+	Flipbook->ZOrder = 1001;
+	Flipbook->Color = SDL_Color{0, 0, 255, 0 };
+	AddComponent(Flipbook);
+
+	Collision = new UCollisionComponent();
+	Collision->SetOwner(this);
+	Collision->bIsCollision = true;
+	Collision->bIsOverlap = true;
+	AddComponent(Collision);
 }
 
 AMonster::~AMonster()
@@ -56,12 +64,20 @@ void AMonster::Tick()
 
 	bool bFlag = false;
 
+	//내꺼에서 충돌 컴포넌트 찾기
 	for (auto OtherActor : AllActors)
 	{
-		if (CheckCollision(OtherActor))
+		for (auto Component : OtherActor->Components)
 		{
-			bFlag = true;
-			break;
+			UCollisionComponent* OtherCollision = dynamic_cast<UCollisionComponent*>(Component);
+			if (OtherCollision)
+			{
+				if (Collision->CheckCollision(OtherCollision))
+				{
+					bFlag = true;
+					break;
+				}
+			}
 		}
 	}
 

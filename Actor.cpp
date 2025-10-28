@@ -3,6 +3,7 @@
 #include <windows.h>
 #include "Engine.h"
 #include "Component.h"
+#include "CollisionComponent.h"
 AActor::AActor() :
 	Location(0, 0)
 {
@@ -20,18 +21,19 @@ void AActor::Tick()
 {
 }
 
-bool AActor::CheckCollision(const AActor* OtherActor)
-{
-	if (OtherActor->bIsOverlap) {
-		return false;
-	}
-	if (OtherActor->bIsCollision && bIsCollision && this->Location == OtherActor->Location && this != OtherActor) 
-	{
-		return true;
-	}
 
-	return false;
-}
+//bool AActor::CheckCollision(const AActor* OtherActor)
+//{
+//	if (OtherActor->bIsOverlap) {
+//		return false;
+//	}
+//	if (OtherActor->bIsCollision && bIsCollision && this->Location == OtherActor->Location && this != OtherActor) 
+//	{
+//		return true;
+//	}
+//
+//	return false;
+//}
 
 void AActor::ActorBeginOverlap()
 {
@@ -43,5 +45,6 @@ void AActor::Hit()
 
 void AActor::AddComponent(UComponent* InComponent)
 {
+	InComponent->SetOwner(this);
 	Components.push_back(InComponent);
 }

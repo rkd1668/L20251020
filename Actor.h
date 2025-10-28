@@ -28,7 +28,13 @@ public:
 		Location.Y = Value.Y;
 	}
 
-	bool CheckCollision(const AActor* Other);
+	//template<typename T>
+	//UComponent* GetComponent<T>()
+	//{
+	//	dynamic_cast<T*>(Component);
+	//}
+	// 
+	//bool CheckCollision(const AActor* Other);
 
 	virtual void ActorBeginOverlap();
 	virtual void Hit();
@@ -43,9 +49,6 @@ protected:
 	
 
 public:
-	bool bIsCollision = false;
-	bool bIsOverlap = true;
-
 	
 };
 

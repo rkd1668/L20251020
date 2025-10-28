@@ -1,6 +1,9 @@
 #pragma once
 #include "Actor.h"
 
+class UCollisionComponent;
+class UPaperFlipbookComponent;
+
 class APlayer : public AActor
 {
 public:
@@ -25,5 +28,8 @@ public:
 	{
 
 	}
+
+	UCollisionComponent* Collision;
+	UPaperFlipbookComponent* Flipbook;
 };
 
