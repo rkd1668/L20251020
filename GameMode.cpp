@@ -38,8 +38,8 @@ void AGameMode::Tick()
 			if (Player->GetActorLocation() == Actor->GetActorLocation())
 			{
 				//gameover
-				exit(-1);
-				break;
+				//exit(-1);
+				//break;
 			}
 		}
 	}
@@ -51,8 +51,8 @@ void AGameMode::Tick()
 			if (Player->GetActorLocation() == Actor->GetActorLocation())
 			{
 				//gameover
-				exit(-1);
-				break;
+				//exit(-1);
+				//break;
 			}
 		}
 	}

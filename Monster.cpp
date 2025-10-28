@@ -7,6 +7,7 @@ AMonster::AMonster()
 	ZOrder = 1001;
 	bIsCollision = true;
 	bIsOverlap = true;
+	Color = { 0, 0, 255, 0 };
 }
 
 AMonster::~AMonster()
