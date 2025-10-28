@@ -41,7 +41,7 @@ void AGameMode::Tick()
 			{
 				//gameover
 				//exit(-1);
-				//break;
+				break;
 			}
 		}
 	}
@@ -54,7 +54,7 @@ void AGameMode::Tick()
 			{
 				//gameover
 				//exit(-1);
-				//break;
+				break;
 			}
 		}
 	}
@@ -71,4 +71,5 @@ void AGameMode::Tick()
 
 void AGameMode::Render()
 {
+
 }

@@ -13,6 +13,7 @@
 #include "Floor.h"
 #include "GameMode.h"
 #include "Timer.h"
+#include "Input.h"
 
 
 #pragma comment(lib, "SDL3")
@@ -25,6 +26,7 @@ FEngine::FEngine() :
 	MyRenderer = nullptr;
 	MyWindow = nullptr;
 	Timer = new UTimer();
+	InputDevice = new UInput();
 }
 
 FEngine::~FEngine()
@@ -36,6 +38,10 @@ FEngine::~FEngine()
 	if (Timer)
 	{
 		delete Timer;
+	}
+	if (InputDevice)
+	{
+		delete InputDevice;
 	}
 }
  
@@ -121,8 +127,17 @@ void FEngine::Run()
 	{
 		Timer->Tick();
 
-		SDL_PollEvent(&MyEvent);
-		//Input();
+		if (SDL_PollEvent(&MyEvent))
+		{
+			switch (MyEvent.type)
+			{
+			case SDL_QUIT:
+				bIsRunning = false;
+				break;
+			}
+		}
+		//SDL_PollEvent(&MyEvent);
+		Input();
 		Tick();
 		Render();
 	
@@ -139,10 +154,11 @@ void FEngine::Term()
 
 void FEngine::Input()
 {
-	if (_kbhit())
+	InputDevice->Tick();
+	/*if (_kbhit())
 	{
 		KeyCode = _getch();
-	}
+	}*/
 }
 
 void FEngine::Tick()

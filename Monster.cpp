@@ -16,6 +16,14 @@ AMonster::~AMonster()
 
 void AMonster::Tick()
 {
+	TotalTime += (float)GEngine->GetWorldDeltaSeconds();
+	if (TotalTime <= ExecuteTime)
+	{
+		return;
+	}
+
+	TotalTime = 0.f;
+
 	int KeyCode = rand() % 4;
 	FVector2D SaveLocation;
 	SaveLocation = Location;

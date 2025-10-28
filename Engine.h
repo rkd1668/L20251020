@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
-
+#include "Input.h"
 #pragma comment(lib, "SDL3")
 class UWorld;
 
@@ -26,7 +26,7 @@ public:
 
 	__forceinline int GetKeyCode() const
 	{
-		return KeyCode;
+		return UInput::KeyCode;
 	}
 
 protected:
@@ -61,6 +61,7 @@ protected:
 
 	//전방선언
 	class UTimer* Timer = nullptr;
+	class UInput* InputDevice = nullptr;
 };
 
 //extern FEngine* GEngine;
