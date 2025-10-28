@@ -1,6 +1,7 @@
 #include "World.h"
 #include "Actor.h"
-#include <algorithm>
+#include "SceneComponent.h"
+#include "PaperFlipbookComponent.h"
 
 UWorld::UWorld()
 {
@@ -36,23 +37,60 @@ void UWorld::Render()
 {
 	for (auto Actor : Actors)
 	{
-		Actor->Render();
+		for (auto Component : Actor->Components)
+		{
+			USceneComponent* Scene = dynamic_cast<USceneComponent*>(Component);
+			if (Scene)
+			{
+				Scene->Render();
+			}
+		}
 	}
-
 }
 
-bool UWorld::CompareActorZOrder(AActor* a,AActor* b)
-{
-	return a->GetZOrder() < b->GetZOrder();
-}
+//bool UWorld::CompareActorZOrder(AActor* a,AActor* b)
+//{
+//	return a->GetZOrder() < b->GetZOrder();
+//}
 
 void UWorld::SortActor()
 {
 	for (int j = 0; j < Actors.size(); j++)
 	{
+		//선택한 액터
+		UPaperFlipbookComponent* Scene1 = nullptr;
+		for (auto Component : Actors[j]->Components)
+		{
+			Scene1 = dynamic_cast<UPaperFlipbookComponent*>(Component);
+			if (Scene1)
+			{
+				break;
+			}
+		}
+
+		if (!Scene1)
+		{
+			continue;
+		}
+
 		for (int i = 0; i < Actors.size(); i++)
 		{
-			if (Actors[j]->GetZOrder() < Actors[i]->GetZOrder())
+			UPaperFlipbookComponent* Scene2 = nullptr;
+			for (auto Component : Actors[i]->Components)
+			{
+				Scene2 = dynamic_cast<UPaperFlipbookComponent*>(Component);
+				if (Scene2)
+				{
+					break;
+				}
+			}
+
+			if (!Scene2)
+			{
+				continue;
+			}
+
+			if (Scene1->GetZOrder() < Scene2->GetZOrder())
 			{
 				AActor* Temp = Actors[j];
 				Actors[j] = Actors[i];
@@ -62,29 +100,29 @@ void UWorld::SortActor()
 	}
 }
 
-void UWorld::SortActorsByZOrder()
-{
-	std::sort(Actors.begin(), Actors.end(), CompareActorZOrder);
-}
+//void UWorld::SortActorsByZOrder()
+//{
+//	std::sort(Actors.begin(), Actors.end(), CompareActorZOrder);
+//}
 
-void UWorld::SelectionSortActors()
-{
-	int Min = 3000;
-	AActor* Tmp;
-	int Index = 0;
-	for (int i = 0; i < Actors.size() - 1; i++)
-	{
-		for (int j = i; j < Actors.size(); j++)
-		{
-			if (Min > Actors[j]->GetZOrder())
-			{
-				Min = Actors[j]->GetZOrder();
-				Index = j;
-			}
-		}
-		Tmp = Actors[i];
-		Actors[i] = Actors[Index];
-		Actors[Index] = Tmp;
-	}
-}
+//void UWorld::SelectionSortActors()
+//{
+//	int Min = 3000;
+//	AActor* Tmp;
+//	int Index = 0;
+//	for (int i = 0; i < Actors.size() - 1; i++)
+//	{
+//		for (int j = i; j < Actors.size(); j++)
+//		{
+//			if (Min > Actors[j]->GetZOrder())
+//			{
+//				Min = Actors[j]->GetZOrder();
+//				Index = j;
+//			}
+//		}
+//		Tmp = Actors[i];
+//		Actors[i] = Actors[Index];
+//		Actors[Index] = Tmp;
+//	}
+//}
 

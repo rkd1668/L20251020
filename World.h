@@ -15,13 +15,13 @@ public:
 	virtual void Tick();
 	virtual void Render();
 
-	static bool CompareActorZOrder(AActor* a,AActor* b);
+	//static bool CompareActorZOrder(AActor* a,AActor* b);
 
 	void SortActor();
 
 	void SortActorsByZOrder();
 
-	void SelectionSortActors();
+	//void SelectionSortActors();
 protected:
 	std::vector<AActor*> Actors;
 };

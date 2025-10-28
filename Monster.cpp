@@ -1,13 +1,21 @@
 #include "Monster.h"
 #include "World.h"
 #include "Engine.h"
+#include "PaperFlipbookComponent.h"
 #include <iostream>
+
 AMonster::AMonster()
 {
-	ZOrder = 1001;
+	//ZOrder = 1001;
 	bIsCollision = true;
 	bIsOverlap = true;
-	Color = { 0, 0, 255, 0 };
+	//Color = { 0, 0, 255, 0 };
+	UPaperFlipbookComponent* Paper = new UPaperFlipbookComponent();
+	Paper->SetShape('M');
+	Paper->SetOwner(this);
+	Paper->ZOrder = 1001;
+	Paper->Color = SDL_Color{0, 0, 255, 0 };
+	AddComponent(Paper);
 }
 
 AMonster::~AMonster()

@@ -75,34 +75,34 @@ void FEngine::OpenLevel()
 				{
 					AActor* NewActor = new AWall();
 					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetShape(Line[X]);
+					//NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
 				else if (Line[X] == 'P')
 				{
 					AActor* NewActor = new APlayer();
 					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetShape(Line[X]);
+					//NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
 				else if (Line[X] == 'M')
 				{
 					AActor* NewActor = new AMonster();
 					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetShape(Line[X]);
+					//NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
 				else if (Line[X] == 'G')
 				{
 					AActor* NewActor = new AGoal();
 					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetShape(Line[X]);
+					//NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
 				{
 					AActor* NewActor = new AFloor();
 					NewActor->SetActorLocation(FVector2D(X, Y));
-					NewActor->SetShape(' ');
+					//NewActor->SetShape(' ');
 					World->SpawnActor(NewActor);
 				}
 			}
@@ -136,7 +136,6 @@ void FEngine::Run()
 				break;
 			}
 		}
-		//SDL_PollEvent(&MyEvent);
 		Input();
 		Tick();
 		Render();
