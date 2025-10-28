@@ -19,12 +19,12 @@ void UPaperFlipbookComponent::Tick()
 
 void UPaperFlipbookComponent::Render()
 {
-	COORD Position;
-	Position.X = GetOwner()->GetActorLocation().X;
-	Position.Y = GetOwner()->GetActorLocation().Y;
+	//COORD Position;
+	//Position.X = GetOwner()->GetActorLocation().X;
+	//Position.Y = GetOwner()->GetActorLocation().Y;
 
-	SetConsoleCursorPosition((HANDLE)GetStdHandle(STD_OUTPUT_HANDLE), Position);
-	std::cout << Shape;
+	//SetConsoleCursorPosition((HANDLE)GetStdHandle(STD_OUTPUT_HANDLE), Position);
+	//std::cout << Shape;
 
 	SDL_SetRenderDrawColor(GEngine->MyRenderer, Color.r, Color.g, Color.b, Color.a);
 	int SizeX = 30;
