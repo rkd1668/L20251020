@@ -50,12 +50,17 @@ public:
 		return Instance;
 	}
 
+	double GetWorldDeltaSeconds() const;
+
 	SDL_Window* MyWindow;
 	SDL_Renderer* MyRenderer;
 	SDL_Event MyEvent;
 
 protected:
 	static FEngine* Instance;
+
+	//전방선언
+	class UTimer* Timer = nullptr;
 };
 
 //extern FEngine* GEngine;
