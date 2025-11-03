@@ -10,5 +10,6 @@ int SDL_main(int argc, char* argv[])
 	GEngine->Term();
 
 	deltaSeconds = SDL_GetTicks64() - deltaSeconds;
+
 	return 0;
 }

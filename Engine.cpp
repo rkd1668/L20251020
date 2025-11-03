@@ -14,6 +14,7 @@
 #include "GameMode.h"
 #include "Timer.h"
 #include "Input.h"
+#include "PaperFlipbookComponent.h"
 
 
 #pragma comment(lib, "SDL3")
@@ -75,6 +76,7 @@ void FEngine::OpenLevel()
 				{
 					AActor* NewActor = new AWall();
 					NewActor->SetActorLocation(FVector2D(X, Y));
+					NewActor->GetComponent<UPaperFlipbookComponent>()->LoadBMP("./Data/Wall.bmp");
 					//NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
@@ -82,6 +84,7 @@ void FEngine::OpenLevel()
 				{
 					AActor* NewActor = new APlayer();
 					NewActor->SetActorLocation(FVector2D(X, Y));
+					NewActor->GetComponent<UPaperFlipbookComponent>()->LoadBMP("./Data/Player.bmp");
 					//NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
@@ -89,6 +92,7 @@ void FEngine::OpenLevel()
 				{
 					AActor* NewActor = new AMonster();
 					NewActor->SetActorLocation(FVector2D(X, Y));
+					NewActor->GetComponent<UPaperFlipbookComponent>()->LoadBMP("./Data/Slime.bmp");
 					//NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
@@ -96,12 +100,14 @@ void FEngine::OpenLevel()
 				{
 					AActor* NewActor = new AGoal();
 					NewActor->SetActorLocation(FVector2D(X, Y));
+					NewActor->GetComponent<UPaperFlipbookComponent>()->LoadBMP("./Data/Goal.bmp");
 					//NewActor->SetShape(Line[X]);
 					World->SpawnActor(NewActor);
 				}
 				{
 					AActor* NewActor = new AFloor();
 					NewActor->SetActorLocation(FVector2D(X, Y));
+					NewActor->GetComponent<UPaperFlipbookComponent>()->LoadBMP("./Data/Floor.bmp");
 					//NewActor->SetShape(' ');
 					World->SpawnActor(NewActor);
 				}

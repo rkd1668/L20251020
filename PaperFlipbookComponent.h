@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneComponent.h"
 #include "SDL3/SDL.h"
+#include <string>
 class UPaperFlipbookComponent : public USceneComponent
 {
 public:
@@ -24,9 +25,13 @@ public:
 	{
 		return ZOrder;
 	}
-	int ZOrder;
 
+	void LoadBMP(std::string FileName);
+	int ZOrder = 0;
 	SDL_Color Color = { 255, 255, 255, 255 };
+	SDL_Surface* BitmapImage = nullptr;
+	SDL_Texture* Texture = nullptr;
+
 protected:
 	char Shape;
 	
