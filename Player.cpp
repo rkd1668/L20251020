@@ -40,18 +40,22 @@ void APlayer::Tick()
 	if (KeyCode == SDLK_w || KeyCode == SDLK_UP)
 	{
 		Location.Y--;
+		Flipbook->YIndex = 2;
 	}
 	if (KeyCode == SDLK_s || KeyCode == SDLK_DOWN)
 	{
 		Location.Y++;
+		Flipbook->YIndex = 3;
 	}
 	if (KeyCode == SDLK_a || KeyCode == SDLK_LEFT)
 	{
 		Location.X--;
+		Flipbook->YIndex = 0;
 	}
 	if (KeyCode == SDLK_d || KeyCode == SDLK_RIGHT)
 	{
 		Location.X++;
+		Flipbook->YIndex = 1;
 	}
 
 	if (KeyCode == SDLK_ESCAPE)

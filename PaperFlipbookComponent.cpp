@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include <iostream>
 #include "Engine.h"
+#include "Monster.h"
 
 UPaperFlipbookComponent::UPaperFlipbookComponent()
 {
@@ -26,10 +27,33 @@ UPaperFlipbookComponent::~UPaperFlipbookComponent()
 
 void UPaperFlipbookComponent::Tick()
 {
+	//int KeyCode = GEngine->GetKeyCode();
+	//if (KeyCode == SDLK_w || KeyCode == SDLK_UP)
+	//{
+	//	YIndex = 2;
+	//}
+	//if (KeyCode == SDLK_s || KeyCode == SDLK_DOWN)
+	//{
+	//	YIndex = 3;
+	//}
+	//if (KeyCode == SDLK_a || KeyCode == SDLK_LEFT)
+	//{
+	//	YIndex = 0;
+	//}
+	//if (KeyCode == SDLK_d || KeyCode == SDLK_RIGHT)
+	//{
+	//	YIndex = 1;
+	//}
+
 	if (bAnimation)
 	{
-		XIndex++;
-		XIndex = (float)((int)XIndex % (int)SpriteCountX);
+		elapsedTime += (float)GEngine->GetWorldDeltaSeconds();
+		if (elapsedTime >= AnimationUpdateTime)
+		{
+			XIndex++;
+			XIndex = (float)((int)XIndex % (int)SpriteCountX);
+			elapsedTime = 0;
+		}
 	}
 }
 
@@ -41,8 +65,6 @@ void UPaperFlipbookComponent::Render()
 
 	//SetConsoleCursorPosition((HANDLE)GetStdHandle(STD_OUTPUT_HANDLE), Position);
 	//std::cout << Shape;
-	int SizeX = 30;
-	int SizeY = 30;
 
 	if (!BitmapImage && !Texture)
 	{
