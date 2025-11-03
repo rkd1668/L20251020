@@ -27,10 +27,18 @@ public:
 	}
 
 	void LoadBMP(std::string FileName);
+
 	int ZOrder = 0;
 	SDL_Color Color = { 255, 255, 255, 255 };
 	SDL_Surface* BitmapImage = nullptr;
 	SDL_Texture* Texture = nullptr;
+	SDL_Color ColorKey = { 255, 0, 255, 255 };
+
+	bool bAnimation = false;
+	float SpriteCountX = 5;
+	float SpriteCountY = 5;
+	float XIndex = 0;
+	float YIndex = 0;
 
 protected:
 	char Shape;

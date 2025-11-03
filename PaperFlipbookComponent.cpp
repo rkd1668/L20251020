@@ -26,6 +26,11 @@ UPaperFlipbookComponent::~UPaperFlipbookComponent()
 
 void UPaperFlipbookComponent::Tick()
 {
+	if (bAnimation)
+	{
+		XIndex++;
+		XIndex = (float)((int)XIndex % (int)SpriteCountX);
+	}
 }
 
 void UPaperFlipbookComponent::Render()
@@ -55,7 +60,18 @@ void UPaperFlipbookComponent::Render()
 	}
 	else
 	{
-		SDL_FRect SourceRect = { 0, 0, BitmapImage->w, BitmapImage->h };
+		SDL_FRect SourceRect;
+		if (bAnimation)
+		{
+			float SpriteSizeX = (float)BitmapImage->w / SpriteCountX;
+			float SpriteSizeY = (float)BitmapImage->h / SpriteCountY;
+			SourceRect = { XIndex * SpriteSizeX, YIndex * SpriteSizeY, SpriteSizeX, SpriteSizeY };
+		}
+		else
+		{
+			SourceRect = { 0, 0, (float)BitmapImage->w, (float)BitmapImage->h };
+		}
+		
 		SDL_FRect DestinationRect = {
 			(float)(GetOwner()->GetActorLocation().X * SizeX),
 			(float)(GetOwner()->GetActorLocation().Y * SizeY),
@@ -70,6 +86,7 @@ void UPaperFlipbookComponent::Render()
 void UPaperFlipbookComponent::LoadBMP(std::string FileName)
 {
 	BitmapImage = SDL_LoadBMP(FileName.c_str());
-
+	
+	SDL_SetColorKey(BitmapImage, true, SDL_MapRGBA(SDL_GetPixelFormatDetails(BitmapImage->format), nullptr, ColorKey.r, ColorKey.g, ColorKey.b, ColorKey.a));
 	Texture = SDL_CreateTextureFromSurface(GEngine->MyRenderer, BitmapImage);
 }
